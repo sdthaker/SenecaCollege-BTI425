@@ -1,5 +1,5 @@
 # Deployed App
-(Click here)[https://tailgating-evan.herokuapp.com/]
+[Click here](https://tailgating-evan.herokuapp.com/)
 
 # Getting Started with Create React App
 
