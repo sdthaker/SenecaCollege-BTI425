@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mongoDBConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`;
+const mongoDBConnectionString = process.env.MONGO_URI;
 const HTTP_PORT = process.env.PORT || 8080;
 
 const express = require("express");
