@@ -13,18 +13,7 @@ const data = dataService(mongoDBConnectionString);
 const app = express();
 
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: [
-      'https://blog-post-app-frontend.herokuapp.com/',
-      'http://localhost:4200/',
-    ],
-    methods: 'GET,PUT,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.post('/api/posts', (req, res) => {
   data
