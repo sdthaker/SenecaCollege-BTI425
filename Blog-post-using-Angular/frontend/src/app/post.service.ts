@@ -19,7 +19,7 @@ export class PostService {
 
   newPost(data: BlogPost): Observable<any> {
     return this.http.post<any>(
-      `http://blog-post-app-backend.herokuapp.com/api/posts`,
+      `https://blog-post-app-backend.herokuapp.com/api/posts`,
       data
     );
   }
