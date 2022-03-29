@@ -29,7 +29,6 @@ module.exports = function (mongoDBConnectionString) {
     addNewPost: function (data) {
       return new Promise((resolve, reject) => {
         let newPost = new Post(data);
-        newPost._id = new mongoose.Types.ObjectId();
 
         newPost.save((err) => {
           if (err) {
