@@ -1,21 +1,32 @@
-require("dotenv").config();
+require('dotenv').config();
 
 const mongoDBConnectionString = process.env.MONGO_URI;
 const HTTP_PORT = process.env.PORT || 8080;
 
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const cors = require("cors");
-const dataService = require("./modules/data-service.js");
+const cors = require('cors');
+const dataService = require('./modules/data-service.js');
 
 const data = dataService(mongoDBConnectionString);
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'https://blog-post-app-frontend.herokuapp.com/',
+      'http://localhost:4200/',
+    ],
+    methods: 'GET,PUT,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+  })
+);
 
-app.post("/api/posts", (req, res) => {
+app.post('/api/posts', (req, res) => {
   data
     .addNewPost(req.body)
     .then((msg) => {
@@ -27,7 +38,7 @@ app.post("/api/posts", (req, res) => {
 });
 
 // IMPORTANT NOTE: ?tag=#funny wll not function, but ?tag=funny will
-app.get("/api/posts", (req, res) => {
+app.get('/api/posts', (req, res) => {
   data
     .getAllPosts(
       req.query.page,
@@ -43,7 +54,7 @@ app.get("/api/posts", (req, res) => {
     });
 });
 
-app.get("/api/categories", (req, res) => {
+app.get('/api/categories', (req, res) => {
   data
     .getCategories()
     .then((data) => {
@@ -54,7 +65,7 @@ app.get("/api/categories", (req, res) => {
     });
 });
 
-app.get("/api/tags", (req, res) => {
+app.get('/api/tags', (req, res) => {
   data
     .getTags()
     .then((data) => {
@@ -65,7 +76,7 @@ app.get("/api/tags", (req, res) => {
     });
 });
 
-app.get("/api/posts/:id", (req, res) => {
+app.get('/api/posts/:id', (req, res) => {
   data
     .getPostById(req.params.id)
     .then((data) => {
@@ -76,7 +87,7 @@ app.get("/api/posts/:id", (req, res) => {
     });
 });
 
-app.put("/api/posts/:id", (req, res) => {
+app.put('/api/posts/:id', (req, res) => {
   data
     .updatePostById(req.body, req.params.id)
     .then((msg) => {
@@ -87,7 +98,7 @@ app.put("/api/posts/:id", (req, res) => {
     });
 });
 
-app.delete("/api/posts/:id", (req, res) => {
+app.delete('/api/posts/:id', (req, res) => {
   data
     .deletePostById(req.params.id)
     .then((msg) => {
@@ -104,10 +115,10 @@ data
   .connect()
   .then(() => {
     app.listen(HTTP_PORT, () => {
-      console.log("API listening on: " + HTTP_PORT);
+      console.log('API listening on: ' + HTTP_PORT);
     });
   })
   .catch((err) => {
-    console.log("unable to start the server: " + err);
+    console.log('unable to start the server: ' + err);
     process.exit();
   });
