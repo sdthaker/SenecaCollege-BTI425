@@ -1,1 +1,1 @@
-[Deployed app](https://blog-post-app-frontend.herokuapp.com/)
+[Front-end deployed app](https://blog-post-app-frontend.herokuapp.com/)
