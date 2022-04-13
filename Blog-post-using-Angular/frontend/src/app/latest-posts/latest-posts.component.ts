@@ -9,14 +9,21 @@ import { PostService } from '../post.service';
 })
 export class LatestPostsComponent implements OnInit {
   posts: Array<BlogPost>;
+  subscription: any = [];
 
   constructor(private postService: PostService) {
     this.posts = new Array<BlogPost>();
   }
 
   ngOnInit(): void {
-    this.postService.getPosts(1, '', '').subscribe((data) => {
-      this.posts = data.slice(0, 3);
-    });
+    this.subscription = this.postService
+      .getPosts(1, '', '')
+      .subscribe((data) => {
+        this.posts = data.slice(0, 3);
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

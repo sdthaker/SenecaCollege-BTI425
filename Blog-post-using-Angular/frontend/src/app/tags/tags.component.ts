@@ -10,12 +10,17 @@ import { PostService } from '../post.service';
 //fetches data from api in future
 export class TagsComponent implements OnInit {
   tags: Array<string> = [];
+  subscription: any = [];
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getTags().subscribe((data) => {
+    this.subscription = this.postService.getTags().subscribe((data) => {
       this.tags = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

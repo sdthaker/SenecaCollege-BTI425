@@ -12,6 +12,9 @@ import { BlogPost } from '../BlogPost';
 export class EditPostComponent implements OnInit {
   blogPost: BlogPost = new BlogPost();
   tags: String = '';
+  updateSubscription: any = [];
+  deleteSubscription: any = [];
+
   constructor(
     private router: Router,
     private postService: PostService,
@@ -19,23 +22,23 @@ export class EditPostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
-      // this.postService.getPostbyId(params['id']).subscribe((data) => {
-      //   this.blogPost = data;
-      //   this.tags = this.blogPost.tags.toString();
-      // });
-      this.postService
-        .getPostbyId(this.activateRoute.snapshot.params['id'])
-        .subscribe((data) => {
-          this.blogPost = data;
-          this.tags = this.blogPost.tags.toString();
-        });
-    });
+    this.postService
+      .getPostbyId(this.activateRoute.snapshot.params['id'])
+      .subscribe((data) => {
+        this.blogPost = data;
+        this.tags = this.blogPost.tags.toString();
+      });
+    //this.activateRoute.params.subscribe((params) => {
+    // this.postService.getPostbyId(params['id']).subscribe((data) => {
+    //   this.blogPost = data;
+    //   this.tags = this.blogPost.tags.toString();
+    // });
+    //});
   }
 
   formSubmit() {
     this.tags.split(',').map((tag) => tag.trim());
-    this.postService
+    this.updateSubscription = this.postService
       .updatePostById(this.blogPost._id, this.blogPost)
       .subscribe((data) => {
         this.router.navigate(['admin']);
@@ -43,8 +46,15 @@ export class EditPostComponent implements OnInit {
   }
 
   deletePost() {
-    this.postService.deletePostById(this.blogPost._id).subscribe((data) => {
-      this.router.navigate(['admin']);
-    });
+    this.deleteSubscription = this.postService
+      .deletePostById(this.blogPost._id)
+      .subscribe((data) => {
+        this.router.navigate(['admin']);
+      });
+  }
+
+  ngOnDestroy() {
+    this.updateSubscription.unsubscribe();
+    this.deleteSubscription.unsubscribe();
   }
 }

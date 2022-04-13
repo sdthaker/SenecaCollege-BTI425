@@ -10,11 +10,16 @@ import { PostService } from '../post.service';
 //fetches data from api in future
 export class CategoriesComponent implements OnInit {
   categories: Array<any> = [];
+  subscription: any = [];
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getCategories().subscribe((data) => {
+    this.subscription = this.postService.getCategories().subscribe((data) => {
       this.categories = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

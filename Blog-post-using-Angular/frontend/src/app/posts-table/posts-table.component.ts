@@ -10,16 +10,21 @@ import { BlogPost } from '../BlogPost';
 })
 export class PostsTableComponent implements OnInit {
   blogPosts: Array<BlogPost> = [];
+  subscription: any = [];
 
   constructor(private router: Router, private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe((data) => {
+    this.subscription = this.postService.getAllPosts().subscribe((data) => {
       this.blogPosts = data;
     });
   }
 
   rowClicked(e: any, id: any) {
     this.router.navigate(['/admin/post', id]);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -11,6 +11,7 @@ import { BlogPost } from '../BlogPost';
 export class NewPostComponent implements OnInit {
   blogPost: BlogPost = new BlogPost();
   tags: string = '';
+  subscription: any;
 
   constructor(private postService: PostService, private router: Router) {}
 
@@ -23,9 +24,15 @@ export class NewPostComponent implements OnInit {
     this.blogPost.postedBy = 'BTI425 Student';
     this.blogPost.views = 0;
 
-    this.postService.newPost(this.blogPost).subscribe((data) => {
-      console.log(data);
-      this.router.navigate(['admin']);
-    });
+    this.subscription = this.postService
+      .newPost(this.blogPost)
+      .subscribe((data) => {
+        console.log(data);
+        this.router.navigate(['admin']);
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
