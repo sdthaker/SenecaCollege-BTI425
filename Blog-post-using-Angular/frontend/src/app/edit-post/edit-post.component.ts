@@ -54,7 +54,9 @@ export class EditPostComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.updateSubscription.unsubscribe();
-    this.deleteSubscription.unsubscribe();
+    if (this.updateSubscription.length > 0)
+      this.updateSubscription.unsubscribe();
+    if (this.deleteSubscription.length > 0)
+      this.deleteSubscription.unsubscribe();
   }
 }
