@@ -11,7 +11,7 @@ import { BlogPost } from '../BlogPost';
 export class NewPostComponent implements OnInit {
   blogPost: BlogPost = new BlogPost();
   tags: string = '';
-  subscription: any;
+  subscription: any = [];
   errorMessage: string = '';
 
   constructor(private postService: PostService, private router: Router) {}
