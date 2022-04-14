@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <h2>Registration</h2>
+        <p>Enter your registration information below:</p>
+      </div>
+
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group">
+          <label class="control-label" for="name">Full name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fullName"
+            name="fullName"
+            [(ngModel)]="user.fullName"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="name">User:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userName"
+            name="userName"
+            [(ngModel)]="user.userName"
+            autofocus
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="name">Password:</label>
+          <input
+            autoComplete="true"
+            type="password"
+            class="form-control"
+            id="password"
+            [(ngModel)]="user.password"
+            name="password"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="name">Retype Password:</label>
+          <input
+            autoComplete="true"
+            type="password"
+            class="form-control"
+            id="password2"
+            [(ngModel)]="user.password2"
+            name="password2"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="name">Role:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="role"
+            name="role"
+            [(ngModel)]="user.role"
+            autofocus
+          />
+        </div>
+
+        <div class="alert alert-danger" *ngIf="warning">
+          {{ warning }}
+        </div>
+
+        <button class="btn btn-primary pull-right" type="submit">
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

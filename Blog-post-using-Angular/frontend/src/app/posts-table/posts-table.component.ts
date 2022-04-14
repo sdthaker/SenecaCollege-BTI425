@@ -25,6 +25,6 @@ export class PostsTableComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription.length > 0) this.subscription.unsubscribe();
   }
 }
