@@ -13,37 +13,34 @@ export class PostService {
 
   getAllPosts(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(
-      `https://blog-post-app-backend.herokuapp.com/api/posts?page=1&perPage=${Number.MAX_SAFE_INTEGER}`
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts?page=1&perPage=${Number.MAX_SAFE_INTEGER}`
     );
   }
 
   newPost(data: BlogPost): Observable<any> {
     return this.http.post<any>(
-      `http://localhost:8080/api/posts`,
-      //`https://blog-post-app-backend.herokuapp.com/api/posts`,
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts`,
       data
     );
   }
 
   updatePostCommentById(id: string, data: BlogPost) {
     return this.http.put<any>(
-      `https://blog-post-app-backend.herokuapp.com/api/posts/comment/${id}`,
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts/comment/${id}`,
       data
     );
   }
 
   updatePostById(id: string, data: BlogPost) {
     return this.http.put<any>(
-      `http://localhost:8080/api/posts/${id}`,
-      //`https://blog-post-app-backend.herokuapp.com/api/posts/${id}`,
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts/${id}`,
       data
     );
   }
 
   deletePostById(id: string): Observable<any> {
     return this.http.delete<any>(
-      `http://localhost:8080/api/posts/${id}`
-      //`https://blog-post-app-backend.herokuapp.com/api/posts/${id}`
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts/${id}`
     );
   }
 
@@ -55,7 +52,7 @@ export class PostService {
     tag = tag.replace(/[#]/g, '');
 
     return this.http.get<BlogPost[]>(
-      `https://blog-post-app-backend.herokuapp.com/api/posts?page=${page}&perPage=${perPage} ${
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/posts?page=${page}&perPage=${perPage} ${
         tag ? `&tag=${tag}` : ''
       } ${category ? `&category=${category}` : ''}`
     );
@@ -63,19 +60,19 @@ export class PostService {
 
   getPostbyId(id: String): Observable<BlogPost> {
     return this.http.get<BlogPost>(
-      `https://blog-post-app-backend.herokuapp.com/api/posts/${id}`
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts/${id}`
     );
   }
 
   getCategories(): Observable<any> {
     return this.http.get<any>(
-      `https://blog-post-app-backend.herokuapp.com/api/categories`
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/categories`
     );
   }
 
   getTags(): Observable<string[]> {
     return this.http.get<string[]>(
-      `https://blog-post-app-backend.herokuapp.com/api/tags`
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/tags`
     );
   }
 }

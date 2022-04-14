@@ -45,11 +45,17 @@ export class AuthService {
   }
 
   register(user: User): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/api/register', user);
+    return this.http.post<any>(
+      'https://blog-post-app-backend-with-jwt.herokuapp.com/api/register',
+      user
+    );
   }
 
   login(user: User): Observable<any> {
     // Attempt to login
-    return this.http.post<any>('http://localhost:8080/api/login', user);
+    return this.http.post<any>(
+      'https://blog-post-app-backend-with-jwt.herokuapp.com/api/login',
+      user
+    );
   }
 }
