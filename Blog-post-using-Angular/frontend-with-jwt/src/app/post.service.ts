@@ -52,7 +52,7 @@ export class PostService {
     tag = tag.replace(/[#]/g, '');
 
     return this.http.get<BlogPost[]>(
-      `https://blog-post-app-backend-with-jwt.herokuapp.com/posts?page=${page}&perPage=${perPage} ${
+      `https://blog-post-app-backend-with-jwt.herokuapp.com/api/posts?page=${page}&perPage=${perPage} ${
         tag ? `&tag=${tag}` : ''
       } ${category ? `&category=${category}` : ''}`
     );
