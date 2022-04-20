@@ -1,0 +1,40 @@
+.outer {
+    background-color: orange;
+    border-radius: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+#cc{
+    color: coral;
+}
+
+#coords{
+     color: coral;
+}
+
+.dot {
+  background-color:blueviolet;
+  border-radius: 13%;
+  display: inline-block;
+  color:white;
+  padding: 5px;
+}
+
+.sun {
+    background-color:rgb(170, 161, 34);
+    border-radius: 2%;
+    display: inline-block;
+    color:white
+}
+
+.data{
+    background-color: black;
+    margin: 13px;
+    border-radius: 2%;
+    padding:15px;
+    color:aliceblue;
+    font-size: 125%;
+    width:100%;
+}
