@@ -29,7 +29,7 @@ export default function Home() {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           await fetch(
-            `https://pro.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}&units=metric`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_APIKEY}&units=metric`
           )
             .then((response) => response.json())
             .then((json) => {
